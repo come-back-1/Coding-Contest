@@ -4,6 +4,9 @@ let prevMouse;
 
 let sun;
 
+let gStarCt = 5000;
+let gStars = [];
+
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight - 4);
 }
@@ -21,6 +24,11 @@ function setup() {
   r = new Body(7, 260, sun, loadImage("Textures/mars.jpg"));
   new Body(3, 22, r, loadImage("Textures/phobos.jpg"));
   new Body(2, 30, r, loadImage("Textures/deimos.jpg"));
+
+  for (let i = 0; i < gStarCt; i++) {
+    gStars[i] = new star(i);
+}
+
 }
 
 function draw() {
@@ -34,6 +42,12 @@ function draw() {
   // translate(drag.x, drag.y);
   rotateX(PI/2);
   // scale(1 / zoom);
+
+  for(let s of gStars) {
+    s.update();
+    s.render()
+}
+
 
   sun.update();
   sun.draw();
